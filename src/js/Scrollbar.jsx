@@ -1,6 +1,7 @@
 import React from 'react';
 import {Motion, spring} from 'react-motion';
 import {modifyObjValues} from './utils';
+import throttle from 'lodash.throttle';
 
 class ScrollBar extends React.Component {
     constructor(props){
@@ -19,7 +20,7 @@ class ScrollBar extends React.Component {
             this.bindedHandleMouseMove = this.handleMouseMoveForHorizontal.bind(this);
         }
 
-        this.bindedHandleMouseUp = this.handleMouseUp.bind(this);
+        this.bindedHandleMouseUp = throttle(this.handleMouseUp.bind(this), 200);
     }
 
     componentDidMount(){

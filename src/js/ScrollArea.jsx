@@ -3,6 +3,7 @@ import ScrollBar from './Scrollbar';
 import {findDOMNode, warnAboutFunctionChild, warnAboutElementChild, positiveOrZero, modifyObjValues} from './utils';
 import lineHeight from 'line-height';
 import {Motion, spring} from 'react-motion';
+import debounce from 'lodash.debounce';
 
 const eventTypes = {
     wheel: 'wheel',
@@ -56,7 +57,7 @@ export default class ScrollArea extends React.Component {
             deltaY: 0
         };
 
-        this.bindedHandleWindowResize = this.handleWindowResize.bind(this);
+        this.bindedHandleWindowResize = debounce(this.handleWindowResize.bind(this), 150);
     }
 
     getChildContext() {
